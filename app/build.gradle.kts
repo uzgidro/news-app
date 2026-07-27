@@ -5,12 +5,16 @@ plugins {
 
 android {
     namespace = "uz.uzgidro.ugenews"
-    compileSdk = 36
+    compileSdk {
+        version = release(37) {
+            minorApiLevel = 1
+        }
+    }
 
     defaultConfig {
         applicationId = "uz.uzgidro.ugenews"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
