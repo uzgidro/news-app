@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">UzGidro News</string>
-    <string name="hello_world">Hello World!</string>
+    <string name="connection_error">No internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="acs_news_image">News image</string>
+    <string name="acs_views">Views</string>
 </resources>

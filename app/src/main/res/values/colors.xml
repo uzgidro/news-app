@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Фирменные цвета UGE (логотип): синие буквы + зелёная молния. -->
+    <color name="uge_blue">#1565C0</color>
+    <color name="uge_green">#43A047</color>
 </resources>

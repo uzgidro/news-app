@@ -6,6 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.annotation.Config
+import uz.uzgidro.ugenews.presentation.MainActivity
 
 /**
  * Robolectric unit test that runs on the JVM (no device required).
