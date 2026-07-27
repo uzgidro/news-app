@@ -48,6 +48,10 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            // Нативные debug-символы в AAB (для читаемых стектрейсов крашей/ANR в Play).
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
             // Подписываем только если keystore.properties присутствует.
             signingConfig = if (keystoreProps.getProperty("storeFile") != null) {
                 signingConfigs.getByName("release")
