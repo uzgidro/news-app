@@ -1,0 +1,7 @@
+<resources>
+    <string name="connection_error">Нет подключения к интернету</string>
+    <string name="retry">Повторить</string>
+    <string name="acs_news_image">Изображение новости</string>
+    <string name="acs_views">Просмотры</string>
+    <string name="menu_language">Язык</string>
+</resources>

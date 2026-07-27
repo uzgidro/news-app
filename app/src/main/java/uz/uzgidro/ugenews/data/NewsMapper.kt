@@ -3,6 +3,7 @@ package uz.uzgidro.ugenews.data
 import uz.uzgidro.ugenews.data.db.NewsEntity
 import uz.uzgidro.ugenews.data.net.dto.NewsItemDto
 import uz.uzgidro.ugenews.domain.AppLanguage
+import uz.uzgidro.ugenews.domain.DateFormatter
 import uz.uzgidro.ugenews.domain.NewsModel
 import uz.uzgidro.ugenews.domain.html.Excerpt
 
@@ -47,7 +48,7 @@ class NewsMapper {
             title = title,
             excerpt = Excerpt.from(text),
             text = text,
-            date = entity.date.orEmpty(),
+            date = DateFormatter.toDisplay(entity.date),
             img = entity.img,
             views = entity.views,
         )
@@ -69,7 +70,7 @@ class NewsMapper {
             title = title,
             excerpt = Excerpt.from(text),
             text = text,
-            date = dto.date.orEmpty(),
+            date = DateFormatter.toDisplay(dto.date),
             img = cleanImageUrl(dto.img),
             views = dto.views ?: 0,
         )

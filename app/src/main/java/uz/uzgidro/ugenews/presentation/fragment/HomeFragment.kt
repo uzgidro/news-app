@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import uz.uzgidro.ugenews.R
@@ -109,9 +110,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.newsRecycler.adapter = adapter.withLoadStateFooter(
+        val columns = resources.getInteger(R.integer.news_columns)
+        val concatAdapter = adapter.withLoadStateFooter(
             NewsLoadStateAdapter { adapter.retry() },
         )
+        binding.newsRecycler.layoutManager = GridLayoutManager(requireContext(), columns).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    // Футер load-state занимает всю ширину; карточки — 1 колонку.
+                    val isFooter = position == concatAdapter.itemCount - 1 &&
+                        adapter.itemCount < concatAdapter.itemCount
+                    return if (isFooter) columns else 1
+                }
+            }
+        }
+        binding.newsRecycler.adapter = concatAdapter
     }
 
     private fun observePaging() {

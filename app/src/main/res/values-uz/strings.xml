@@ -1,0 +1,7 @@
+<resources>
+    <string name="connection_error">Internet aloqasi yo‘q</string>
+    <string name="retry">Qayta urinish</string>
+    <string name="acs_news_image">Yangilik rasmi</string>
+    <string name="acs_views">Ko‘rishlar</string>
+    <string name="menu_language">Til</string>
+</resources>
