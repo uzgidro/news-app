@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import uz.uzgidro.ugenews.R
 import uz.uzgidro.ugenews.databinding.CardNewsBinding
 import uz.uzgidro.ugenews.domain.NewsModel
+import uz.uzgidro.ugenews.presentation.loadNews
 
 class NewsAdapter(
     private val onClick: (NewsModel) -> Unit,
@@ -27,11 +26,7 @@ class NewsAdapter(
             cardTitle.text = item.title
             cardExcerpt.text = item.excerpt
             cardViews.text = item.views.toString()
-            cardImage.load(item.img) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_background)
-                error(R.drawable.ic_launcher_background)
-            }
+            cardImage.loadNews(item.img)
             root.setOnClickListener { onClick(item) }
         }
     }

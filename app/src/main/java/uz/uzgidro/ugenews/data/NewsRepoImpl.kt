@@ -26,6 +26,8 @@ class NewsRepoImpl(
         return Pager(
             config = PagingConfig(
                 pageSize = NewsRemoteMediator.PAGE_SIZE,
+                initialLoadSize = NewsRemoteMediator.PAGE_SIZE,
+                prefetchDistance = NewsRemoteMediator.PAGE_SIZE / 4,
                 enablePlaceholders = false,
             ),
             remoteMediator = NewsRemoteMediator(api, db, mapper),

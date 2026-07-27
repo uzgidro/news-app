@@ -107,4 +107,33 @@ class NewsRemoteMediatorTest {
         // Дважды REFRESH page 1 → всё ещё 2 записи (clearAll перед вставкой), не 4.
         assertEquals(2, db.newsDao().count())
     }
+
+    /**
+     * Регрессия: живой сервер `?page=N` игнорировал параметр и отдавал одинаковые id →
+     * APPEND каскадил до 510 стр. Даже если API вернёт дубли, mediator обязан достичь
+     * конца по _meta.pageCount, а не крутиться бесконечно.
+     */
+    @Test
+    fun `append reaches end by pageCount even if api returns duplicate ids`() = runTest {
+        val brokenApi = object : NewsApi {
+            override suspend fun getNews(page: Int) = NewsResponseDto(
+                items = listOf(NewsItemDto(id = 1, ru = "x", rutext = "<p>x</p>", views = 1)),
+                meta = MetaDto(pageCount = 2, currentPage = page, perPage = 1),
+            )
+        }
+        val m = NewsRemoteMediator(brokenApi, db, NewsMapper())
+        m.load(LoadType.REFRESH, emptyState())
+
+        val last = db.newsDao().getById(1)!! // nextKey = 2
+        val statePage = androidx.paging.PagingSource.LoadResult.Page<Int, NewsEntity>(
+            data = listOf(last), prevKey = null, nextKey = null,
+        )
+        val state = PagingState<Int, NewsEntity>(
+            pages = listOf(statePage), anchorPosition = 0,
+            config = PagingConfig(pageSize = 1), leadingPlaceholderCount = 0,
+        )
+        val result = m.load(LoadType.APPEND, state) as RemoteMediator.MediatorResult.Success
+        // page 2 == pageCount → конец достигнут, дальше APPEND не пойдёт.
+        assertTrue("конец по pageCount", result.endOfPaginationReached)
+    }
 }

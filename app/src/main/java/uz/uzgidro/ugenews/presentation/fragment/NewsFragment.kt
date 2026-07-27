@@ -16,13 +16,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.launch
 import uz.uzgidro.ugenews.R
 import uz.uzgidro.ugenews.databinding.FragmentNewsBinding
 import uz.uzgidro.ugenews.domain.html.ContentBlock
 import uz.uzgidro.ugenews.presentation.App
+import uz.uzgidro.ugenews.presentation.loadNews
 import uz.uzgidro.ugenews.presentation.viewmodel.NewsDetailState
 import uz.uzgidro.ugenews.presentation.viewmodel.NewsViewModel
 import uz.uzgidro.ugenews.presentation.viewmodel.ViewModelFactory
@@ -78,11 +78,7 @@ class NewsFragment : Fragment() {
         binding.newsTitle.text = news.title
         binding.dateChip.text = news.date
         binding.viewsChip.text = news.views.toString()
-        binding.heroImage.load(news.img) {
-            crossfade(true)
-            placeholder(R.drawable.ic_launcher_background)
-            error(R.drawable.ic_launcher_background)
-        }
+        binding.heroImage.loadNews(news.img)
         renderBlocks(state.blocks)
     }
 
@@ -100,7 +96,7 @@ class NewsFragment : Fragment() {
                 }
                 is ContentBlock.Image -> {
                     val iv = inflater.inflate(R.layout.item_content_image, container, false) as ImageView
-                    iv.load(block.url) { crossfade(true) }
+                    iv.loadNews(block.url)
                     container.addView(iv)
                 }
             }
