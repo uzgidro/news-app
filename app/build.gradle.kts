@@ -25,8 +25,8 @@ android {
         applicationId = "uz.uzgidro.ugenews"
         minSdk = 26
         targetSdk = 37
-        // Play уже содержит versionCode 3 (targetSdk 35) → следующая загрузка ≥ 4.
-        versionCode = 4
+        // versionCode 4 уже занят в Play → следующая загрузка = 5.
+        versionCode = 5
         versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
