@@ -1,5 +1,7 @@
 [versions]
 agp = "9.3.1"
+# Kotlin-компилятор несёт AGP (built-in Kotlin 2.2.10) — этот ключ версии плагинов НЕ задаёт,
+# оставлен как справка о совместимой версии для KSP ниже.
 kotlin = "2.2.10"
 ksp = "2.2.10-2.0.2"
 coreKtx = "1.15.0"
@@ -62,7 +64,8 @@ robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+# Компиляторный плагин Kotlin — БЕЗ версии: под built-in Kotlin её задаёт pluginManagement
+# (версия здесь затянула бы второй kotlin-gradle-plugin и сломала подключение субплагина).
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
