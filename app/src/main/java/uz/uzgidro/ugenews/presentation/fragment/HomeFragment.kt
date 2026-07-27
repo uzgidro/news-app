@@ -2,8 +2,12 @@ package uz.uzgidro.ugenews.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -14,9 +18,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import uz.uzgidro.ugenews.R
 import uz.uzgidro.ugenews.databinding.FragmentHomeBinding
+import uz.uzgidro.ugenews.domain.AppLanguage
 import uz.uzgidro.ugenews.presentation.App
 import uz.uzgidro.ugenews.presentation.recycler.NewsAdapter
 import uz.uzgidro.ugenews.presentation.recycler.NewsLoadStateAdapter
@@ -29,7 +35,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels {
-        ViewModelFactory((requireActivity().application as App).container.newsRepo)
+        val c = (requireActivity().application as App).container
+        ViewModelFactory(c.newsRepo, c.languageStore)
     }
 
     private val adapter by lazy {
@@ -52,11 +59,44 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupMenu()
         applyInsets()
         setupRecycler()
         observePaging()
         binding.swipeRefresh.setOnRefreshListener { adapter.refresh() }
         binding.retryButton.setOnClickListener { adapter.retry() }
+    }
+
+    private fun setupMenu() {
+        binding.toolbar.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+                    inflater.inflate(R.menu.menu_home, menu)
+                }
+
+                override fun onMenuItemSelected(item: MenuItem): Boolean =
+                    if (item.itemId == R.id.action_language) {
+                        showLanguageDialog(); true
+                    } else false
+            },
+            viewLifecycleOwner,
+        )
+    }
+
+    private fun showLanguageDialog() {
+        val languages = listOf(AppLanguage.UZ, AppLanguage.RU, AppLanguage.ENG)
+        val labels = arrayOf(
+            getString(R.string.language_uz),
+            getString(R.string.language_ru),
+            getString(R.string.language_en),
+        )
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.menu_language)
+            .setItems(labels) { _, which ->
+                viewModel.setLanguage(languages[which])
+                // Ремап ленты на новый язык произойдёт через flatMapLatest в VM.
+            }
+            .show()
     }
 
     private fun applyInsets() {

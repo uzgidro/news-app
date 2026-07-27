@@ -8,6 +8,7 @@ import uz.uzgidro.ugenews.data.db.NewsDatabase
 import uz.uzgidro.ugenews.data.net.api.NewsApi
 import uz.uzgidro.ugenews.data.net.api.RetrofitClient
 import uz.uzgidro.ugenews.domain.NewsRepo
+import uz.uzgidro.ugenews.presentation.viewmodel.LanguageStore
 
 /**
  * Простой ручной DI-контейнер (граф крошечный — Hilt избыточен).
@@ -26,4 +27,6 @@ class AppContainer(private val appContext: Context) {
     private val mapper: NewsMapper by lazy { NewsMapper() }
 
     val newsRepo: NewsRepo by lazy { NewsRepoImpl(api, database, mapper) }
+
+    val languageStore: LanguageStore by lazy { LanguageStore(appContext) }
 }

@@ -21,7 +21,6 @@ import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.launch
 import uz.uzgidro.ugenews.R
 import uz.uzgidro.ugenews.databinding.FragmentNewsBinding
-import uz.uzgidro.ugenews.domain.AppLanguage
 import uz.uzgidro.ugenews.domain.html.ContentBlock
 import uz.uzgidro.ugenews.presentation.App
 import uz.uzgidro.ugenews.presentation.viewmodel.NewsDetailState
@@ -36,7 +35,8 @@ class NewsFragment : Fragment() {
     private val newsId: Int by lazy { requireArguments().getInt("newsId") }
 
     private val viewModel: NewsViewModel by viewModels {
-        ViewModelFactory((requireActivity().application as App).container.newsRepo)
+        val c = (requireActivity().application as App).container
+        ViewModelFactory(c.newsRepo, c.languageStore)
     }
 
     override fun onCreateView(
@@ -53,8 +53,7 @@ class NewsFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         applyInsets()
         observeState()
-        // TODO(Wave 5): язык из LanguageStore. Пока язык по умолчанию.
-        viewModel.load(newsId, AppLanguage.DEFAULT)
+        viewModel.load(newsId)
     }
 
     private fun applyInsets() {

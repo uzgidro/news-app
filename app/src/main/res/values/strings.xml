@@ -4,4 +4,8 @@
     <string name="retry">Retry</string>
     <string name="acs_news_image">News image</string>
     <string name="acs_views">Views</string>
+    <string name="menu_language">Language</string>
+    <string name="language_uz">O‘zbekcha</string>
+    <string name="language_ru">Русский</string>
+    <string name="language_en">English</string>
 </resources>
