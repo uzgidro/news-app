@@ -9,3 +9,6 @@
 .cxx
 local.properties
 /docs/plans/
+keystore.properties
+*.jks
+*.keystore
