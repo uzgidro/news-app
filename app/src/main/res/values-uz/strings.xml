@@ -4,4 +4,13 @@
     <string name="acs_news_image">Yangilik rasmi</string>
     <string name="acs_views">Ko‘rishlar</string>
     <string name="menu_language">Til</string>
+
+    <string name="menu_contacts">Aloqa</string>
+    <string name="contacts_title">Aloqa</string>
+    <string name="contacts_email_label">Elektron pochta</string>
+    <string name="contacts_phone_label">Telefon</string>
+    <string name="contacts_address_label">Manzil</string>
+    <string name="contacts_website_label">Veb-sayt</string>
+
+    <string name="source_label">Manba</string>
 </resources>

@@ -1,11 +1,14 @@
 package uz.uzgidro.ugenews.presentation.fragment
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -52,8 +55,22 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         applyInsets()
+        setupSourceLink()
         observeState()
         viewModel.load(newsId)
+    }
+
+    // Источник новости (требование политики Google Play: original publisher/source).
+    private fun setupSourceLink() {
+        binding.sourceLink.text =
+            getString(R.string.source_label) + ": " + getString(R.string.source_name)
+        binding.sourceLink.setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, getString(R.string.source_url).toUri()))
+            } catch (_: ActivityNotFoundException) {
+                // Нет браузера — молча игнорируем.
+            }
+        }
     }
 
     private fun applyInsets() {

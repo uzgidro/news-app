@@ -97,6 +97,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?attr/colorOutlineVariant" />
+
+            <TextView
+                android:id="@+id/sourceLink"
+                style="@style/TextAppearance.Material3.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="8dp"
+                android:textColor="?attr/colorPrimary"
+                app:drawableStartCompat="@drawable/ic_web"
+                app:drawableTint="?attr/colorPrimary"
+                tools:text="Источник: uzgidro.uz" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

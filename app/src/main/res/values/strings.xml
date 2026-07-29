@@ -9,4 +9,24 @@
     <string name="language_uz" translatable="false">O‘zbekcha</string>
     <string name="language_ru" translatable="false">Русский</string>
     <string name="language_en" translatable="false">English</string>
+
+    <!-- Экран «Контакты» (требование политики Google Play News & Magazines). -->
+    <string name="menu_contacts">Contacts</string>
+    <string name="contacts_title">Contacts</string>
+    <string name="contacts_email_label">Email</string>
+    <string name="contacts_phone_label">Phone</string>
+    <string name="contacts_address_label">Address</string>
+    <string name="contacts_website_label">Website</string>
+    <!-- Значения контактов — не переводятся. -->
+    <string name="contacts_email" translatable="false">devonxona@uzgidro.uz</string>
+    <string name="contacts_phone" translatable="false">+998 78 150-50-15</string>
+    <string name="contacts_phone_dial" translatable="false">+998781505015</string>
+    <string name="contacts_address" translatable="false">100011, Toshkent shahar, Navoiy koʻchasi, 22</string>
+    <string name="contacts_website" translatable="false">uzgidro.uz</string>
+    <string name="contacts_website_url" translatable="false">https://uzgidro.uz</string>
+
+    <!-- Источник статьи (требование «original publisher»). -->
+    <string name="source_label">Source</string>
+    <string name="source_name" translatable="false">uzgidro.uz</string>
+    <string name="source_url" translatable="false">https://uzgidro.uz/news</string>
 </resources>

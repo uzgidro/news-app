@@ -4,4 +4,13 @@
     <string name="acs_news_image">Изображение новости</string>
     <string name="acs_views">Просмотры</string>
     <string name="menu_language">Язык</string>
+
+    <string name="menu_contacts">Контакты</string>
+    <string name="contacts_title">Контакты</string>
+    <string name="contacts_email_label">Эл. почта</string>
+    <string name="contacts_phone_label">Телефон</string>
+    <string name="contacts_address_label">Адрес</string>
+    <string name="contacts_website_label">Веб-сайт</string>
+
+    <string name="source_label">Источник</string>
 </resources>

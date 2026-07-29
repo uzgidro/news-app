@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_language"
         android:title="@string/menu_language"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_contacts"
+        android:icon="@drawable/ic_email"
+        android:title="@string/menu_contacts"
+        app:showAsAction="never" />
 </menu>

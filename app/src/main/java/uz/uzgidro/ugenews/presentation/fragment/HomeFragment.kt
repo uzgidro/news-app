@@ -76,9 +76,15 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onMenuItemSelected(item: MenuItem): Boolean =
-                    if (item.itemId == R.id.action_language) {
-                        showLanguageDialog(); true
-                    } else false
+                    when (item.itemId) {
+                        R.id.action_language -> {
+                            showLanguageDialog(); true
+                        }
+                        R.id.action_contacts -> {
+                            findNavController().navigate(R.id.action_home_to_contact); true
+                        }
+                        else -> false
+                    }
             },
             viewLifecycleOwner,
         )

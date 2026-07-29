@@ -25,9 +25,9 @@ android {
         applicationId = "uz.uzgidro.ugenews"
         minSdk = 26
         targetSdk = 37
-        // versionCode 4 уже занят в Play → следующая загрузка = 5.
-        versionCode = 5
-        versionName = "1.1"
+        // versionCode 5 отклонён Play (News-политика) → следующая загрузка = 6.
+        versionCode = 6
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
